@@ -1,0 +1,24 @@
+vector<vector<int> > Solution::permute(vector<int> &A) {
+    int n=A.size();
+    vector<vector<int>> ans;
+    sort(A.begin(),A.end());
+    ans.push_back(A);
+    while(1)
+    {
+        int k=-1;
+        for(int i=0;i<n-1;i++)
+        {
+            if(A[i]<A[i+1]) k=i;
+        }
+        if(k==-1) break;
+        int l=-1;
+        for(int i=k+1;i<n;i++)
+        {
+            if(A[i]>A[k]) l=i;
+        }
+        swap(A[l],A[k]);
+        reverse(A.begin()+k+1,A.end());
+        ans.push_back(A);
+    }
+    return ans;
+}
